@@ -1,0 +1,282 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>parse5 by inikulin</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>parse5</h1>
+        <p>WHATWG HTML5 specification-compliant, fast and ready for production HTML parsing/serialization toolset for Node. </p>
+
+        <p class="view"><a href="https://github.com/inikulin/parse5">View the Project on GitHub <small>inikulin/parse5</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/inikulin/parse5/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/inikulin/parse5/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/inikulin/parse5">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <p align="center">
+  <img src="https://raw.github.com/inikulin/parse5/master/logo.png" alt="parse5"></p>
+
+<p><em>WHATWG HTML5 specification-compliant, fast and ready for production HTML parsing/serialization toolset for Node.</em></p>
+
+<p>To build <a href="http://testcafe.devexpress.com/">TestCafé</a> we needed fast and ready for production HTML parser, which will parse HTML as a modern browser's parser.
+Existing solutions were either too slow or their output was too inaccurate. So, this is how parse5 was born.</p>
+
+<p><strong>Included tools:</strong></p>
+
+<ul>
+<li>  <a href="#class-parser">Parser</a> - HTML to DOM-tree parser.</li>
+<li>  <a href="#class-simpleapiparser">SimpleApiParser</a> - <a href="http://en.wikipedia.org/wiki/Simple_API_for_XML">SAX</a>-style parser for HTML.</li>
+<li>  <a href="#class-treeserializer">TreeSerializer</a> - DOM-tree to HTML serializer.</li>
+</ul><h2>
+<a name="install" class="anchor" href="#install"><span class="octicon octicon-link"></span></a>Install</h2>
+
+<pre><code>$ npm install parse5
+</code></pre>
+
+<h2>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<div class="highlight highlight-js"><pre><span class="kd">var</span> <span class="nx">Parser</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'parse5'</span><span class="p">).</span><span class="nx">Parser</span><span class="p">;</span>
+
+<span class="c1">//Instantiate parser</span>
+<span class="kd">var</span> <span class="nx">parser</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Parser</span><span class="p">();</span>
+
+<span class="c1">//Then feed it with an HTML document</span>
+<span class="kd">var</span> <span class="nb">document</span> <span class="o">=</span> <span class="nx">parser</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="s1">'&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;Hi there!&lt;/body&gt;&lt;/html&gt;'</span><span class="p">)</span>
+
+<span class="c1">//Now let's parse HTML-snippet</span>
+<span class="kd">var</span> <span class="nx">fragment</span> <span class="o">=</span> <span class="nx">parser</span><span class="p">.</span><span class="nx">parseFragment</span><span class="p">(</span><span class="s1">'&lt;title&gt;Parse5 is &amp;#102;&amp;#117;&amp;#99;&amp;#107;ing awesome!&lt;/title&gt;&lt;h1&gt;42&lt;/h1&gt;'</span><span class="p">);</span>
+
+</pre></div>
+
+<h2>
+<a name="is-it-fast" class="anchor" href="#is-it-fast"><span class="octicon octicon-link"></span></a>Is it fast?</h2>
+
+<p>Check out <a href="https://github.com/inikulin/node-html-parser-bench">this benchmark</a>.</p>
+
+<pre><code>Starting benchmark. Fasten your seatbelts...
+html5 (https://github.com/aredridel/html5) x 0.18 ops/sec ±5.92% (5 runs sampled)
+htmlparser (https://github.com/tautologistics/node-htmlparser/) x 3.83 ops/sec ±42.43% (14 runs sampled)
+htmlparser2 (https://github.com/fb55/htmlparser2) x 4.05 ops/sec ±39.27% (15 runs sampled)
+parse5 (https://github.com/inikulin/parse5) x 3.04 ops/sec ±51.81% (13 runs sampled)
+Fastest is htmlparser2 (https://github.com/fb55/htmlparser2),parse5 (https://github.com/inikulin/parse5)
+</code></pre>
+
+<p>So, parse5 is as fast as simple specification incompatible parsers and ~15-times(!) faster than the current specification compatible parser available for the node.</p>
+
+<h2>
+<a name="api-reference" class="anchor" href="#api-reference"><span class="octicon octicon-link"></span></a>API reference</h2>
+
+<h3>
+<a name="enum-treeadapters" class="anchor" href="#enum-treeadapters"><span class="octicon octicon-link"></span></a>Enum: TreeAdapters</h3>
+
+<p>Provides built-in tree adapters which can be passed as an optional argument to the <code>Parser</code> and <code>TreeSerializer</code> constructors.</p>
+
+<h4>
+<a name="-treeadaptersdefault" class="anchor" href="#-treeadaptersdefault"><span class="octicon octicon-link"></span></a>• TreeAdapters.default</h4>
+
+<p>Default tree format for parse5.</p>
+
+<h4>
+<a name="-treeadaptershtmlparser2" class="anchor" href="#-treeadaptershtmlparser2"><span class="octicon octicon-link"></span></a>• TreeAdapters.htmlparser2</h4>
+
+<p>Quite popular <a href="https://github.com/fb55/htmlparser2">htmlparser2</a> tree format (e.g. used in <a href="https://github.com/MatthewMueller/cheerio">cheerio</a> and <a href="https://github.com/tmpvar/jsdom">jsdom</a>).  </p>
+
+<hr><h3>
+<a name="class-parser" class="anchor" href="#class-parser"><span class="octicon octicon-link"></span></a>Class: Parser</h3>
+
+<p>Provides HTML parsing functionality.</p>
+
+<h4>
+<a name="-parserctortreeadapter" class="anchor" href="#-parserctortreeadapter"><span class="octicon octicon-link"></span></a>• Parser.ctor([treeAdapter])</h4>
+
+<p>Creates new reusable instance of the <code>Parser</code>. Optional <code>treeAdapter</code> argument specifies resulting tree format. If <code>treeAdapter</code> argument is not specified, <code>default</code> tree adapter will be used.</p>
+
+<p><em>Example:</em></p>
+
+<div class="highlight highlight-js"><pre><span class="kd">var</span> <span class="nx">parse5</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'parse5'</span><span class="p">);</span>
+
+<span class="c1">//Instantiate new parser with default tree adapter</span>
+<span class="kd">var</span> <span class="nx">parser1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">parse5</span><span class="p">.</span><span class="nx">Parser</span><span class="p">();</span>
+
+<span class="c1">//Instantiate new parser with htmlparser2 tree adapter</span>
+<span class="kd">var</span> <span class="nx">parser2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">parse5</span><span class="p">.</span><span class="nx">Parser</span><span class="p">(</span><span class="nx">parse5</span><span class="p">.</span><span class="nx">TreeAdapters</span><span class="p">.</span><span class="nx">htmlparser2</span><span class="p">);</span>
+</pre></div>
+
+<h4>
+<a name="-parserparsehtml" class="anchor" href="#-parserparsehtml"><span class="octicon octicon-link"></span></a>• Parser.parse(html)</h4>
+
+<p>Parses specified <code>html</code> string. Returns <code>document</code> node.</p>
+
+<p><em>Example:</em></p>
+
+<div class="highlight highlight-js"><pre><span class="kd">var</span> <span class="nb">document</span> <span class="o">=</span> <span class="nx">parser</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="s1">'&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;Hi there!&lt;/body&gt;&lt;/html&gt;'</span><span class="p">);</span>
+</pre></div>
+
+<h4>
+<a name="-parserparsefragmenthtmlfragment-contextelement" class="anchor" href="#-parserparsefragmenthtmlfragment-contextelement"><span class="octicon octicon-link"></span></a>• Parser.parseFragment(htmlFragment, [contextElement])</h4>
+
+<p>Parses given <code>htmlFragment</code>. Returns <code>documentFragment</code> node. Optional <code>contextElement</code> argument specifies context in which given <code>htmlFragment</code> will be parsed (consider it as setting <code>contextElement.innerHTML</code> property). If <code>contextElement</code> argument is not specified, <code>&lt;div&gt;</code> element will be used.</p>
+
+<p><em>Example:</em></p>
+
+<div class="highlight highlight-js"><pre><span class="kd">var</span> <span class="nx">documentFragment</span> <span class="o">=</span> <span class="nx">parser</span><span class="p">.</span><span class="nx">parseFragment</span><span class="p">(</span><span class="s1">'&lt;table&gt;&lt;/table&gt;'</span><span class="p">);</span>
+
+<span class="c1">//Parse html fragment in context of the parsed &lt;table&gt; element</span>
+<span class="kd">var</span> <span class="nx">trFragment</span> <span class="o">=</span> <span class="nx">parser</span><span class="p">.</span><span class="nx">parseFragment</span><span class="p">(</span><span class="s1">'&lt;tr&gt;&lt;td&gt;Shake it, baby&lt;/td&gt;&lt;/tr&gt;'</span><span class="p">,</span> <span class="nx">documentFragment</span><span class="p">.</span><span class="nx">childNodes</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+</pre></div>
+
+<hr><h3>
+<a name="class-simpleapiparser" class="anchor" href="#class-simpleapiparser"><span class="octicon octicon-link"></span></a>Class: SimpleApiParser</h3>
+
+<p>Provides <a href="https://en.wikipedia.org/wiki/Simple_API_for_XML">SAX</a>-style HTML parsing functionality.</p>
+
+<h4>
+<a name="-simpleapiparserctorhandlers" class="anchor" href="#-simpleapiparserctorhandlers"><span class="octicon octicon-link"></span></a>• SimpleApiParser.ctor(handlers)</h4>
+
+<p>Creates new reusable instance of the <code>SimpleApiParser</code>. <code>handlers</code> argument specifies object that contains parser's event handlers. Possible events and their signatures are shown in the example.</p>
+
+<p><em>Example:</em></p>
+
+<div class="highlight highlight-js"><pre><span class="kd">var</span> <span class="nx">parse5</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'parse5'</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">parser</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">parse5</span><span class="p">.</span><span class="nx">SimpleApiParser</span><span class="p">({</span>
+    <span class="nx">doctype</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">publicId</span><span class="p">,</span> <span class="nx">systemId</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">//Handle doctype here</span>
+    <span class="p">},</span>
+
+    <span class="nx">startTag</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">tagName</span><span class="p">,</span> <span class="nx">attrs</span><span class="p">,</span> <span class="nx">selfClosing</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">//Handle start tags here</span>
+    <span class="p">},</span>
+
+    <span class="nx">endTag</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">tagName</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">//Handle end tags here</span>
+    <span class="p">},</span>
+
+    <span class="nx">text</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">text</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">//Handle texts here</span>
+    <span class="p">},</span>
+
+    <span class="nx">comment</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">text</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">//Handle comments here</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+
+<h4>
+<a name="-simpleapiparserparsehtml" class="anchor" href="#-simpleapiparserparsehtml"><span class="octicon octicon-link"></span></a>• SimpleApiParser.parse(html)</h4>
+
+<p>Raises parser events for the given <code>html</code>.</p>
+
+<p><em>Example:</em></p>
+
+<div class="highlight highlight-js"><pre><span class="kd">var</span> <span class="nx">parse5</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'parse5'</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">parser</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">parse5</span><span class="p">.</span><span class="nx">SimpleApiParser</span><span class="p">({</span>
+    <span class="nx">text</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">text</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">text</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+
+<span class="nx">parser</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="s1">'&lt;body&gt;Yo!&lt;/body&gt;'</span><span class="p">);</span>
+</pre></div>
+
+<hr><h3>
+<a name="class-treeserializer" class="anchor" href="#class-treeserializer"><span class="octicon octicon-link"></span></a>Class: TreeSerializer</h3>
+
+<p>Provides tree-to-HTML serialization functionality.</p>
+
+<h4>
+<a name="-treeserializerctortreeadapter" class="anchor" href="#-treeserializerctortreeadapter"><span class="octicon octicon-link"></span></a>• TreeSerializer.ctor([treeAdapter])</h4>
+
+<p>Creates new reusable instance of the <code>TreeSerializer</code>. Optional <code>treeAdapter</code> argument specifies input tree format. If <code>treeAdapter</code> argument is not specified, <code>default</code> tree adapter will be used.</p>
+
+<p><em>Example:</em></p>
+
+<div class="highlight highlight-js"><pre><span class="kd">var</span> <span class="nx">parse5</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'parse5'</span><span class="p">);</span>
+
+<span class="c1">//Instantiate new serializer with default tree adapter</span>
+<span class="kd">var</span> <span class="nx">serializer1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">parse5</span><span class="p">.</span><span class="nx">TreeSerializer</span><span class="p">();</span>
+
+<span class="c1">//Instantiate new serializer with htmlparser2 tree adapter</span>
+<span class="kd">var</span> <span class="nx">serializer2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">parse5</span><span class="p">.</span><span class="nx">TreeSerializer</span><span class="p">(</span><span class="nx">parse5</span><span class="p">.</span><span class="nx">TreeAdapters</span><span class="p">.</span><span class="nx">htmlparser2</span><span class="p">);</span>
+</pre></div>
+
+<h4>
+<a name="-treeserializerserializenode" class="anchor" href="#-treeserializerserializenode"><span class="octicon octicon-link"></span></a>• TreeSerializer.serialize(node)</h4>
+
+<p>Serializes the given <code>node</code>. Returns HTML string.</p>
+
+<p><em>Example:</em></p>
+
+<div class="highlight highlight-js"><pre><span class="kd">var</span> <span class="nb">document</span> <span class="o">=</span> <span class="nx">parser</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="s1">'&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;Hi there!&lt;/body&gt;&lt;/html&gt;'</span><span class="p">);</span>
+
+<span class="c1">//Serialize document</span>
+<span class="kd">var</span> <span class="nx">html</span> <span class="o">=</span> <span class="nx">serializer</span><span class="p">.</span><span class="nx">serialize</span><span class="p">(</span><span class="nb">document</span><span class="p">);</span>
+
+<span class="c1">//Serialize &lt;body&gt; element content</span>
+<span class="kd">var</span> <span class="nx">bodyInnerHtml</span> <span class="o">=</span> <span class="nx">serializer</span><span class="p">.</span><span class="nx">serialize</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">childNodes</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">childNodes</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+</pre></div>
+
+<hr><h2>
+<a name="testing" class="anchor" href="#testing"><span class="octicon octicon-link"></span></a>Testing</h2>
+
+<p>Test data is adopted from <a href="https://github.com/html5lib">html5lib project</a>. Parser is covered by more than 8000 test cases.
+To run tests:</p>
+
+<pre><code>$ npm test
+</code></pre>
+
+<h2>
+<a name="custom-tree-adapter" class="anchor" href="#custom-tree-adapter"><span class="octicon octicon-link"></span></a>Custom tree adapter</h2>
+
+<p>You can create a custom tree adapter so parse5 can work with your own DOM-tree implementation.
+Just pass your adapter implementation to the parser's constructor as an argument:</p>
+
+<div class="highlight highlight-js"><pre><span class="kd">var</span> <span class="nx">Parser</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'parse5'</span><span class="p">).</span><span class="nx">Parser</span><span class="p">;</span>
+
+<span class="kd">var</span> <span class="nx">myTreeAdapter</span> <span class="o">=</span> <span class="p">{</span>
+   <span class="c1">//Adapter methods...</span>
+<span class="p">};</span>
+
+<span class="c1">//Instantiate parser</span>
+<span class="kd">var</span> <span class="nx">parser</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Parser</span><span class="p">(</span><span class="nx">myTreeAdapter</span><span class="p">);</span>
+</pre></div>
+
+<p>Sample implementation can be found <a href="https://github.com/inikulin/parse5/blob/master/lib/tree_adapters/default.js">here</a>.
+The custom tree adapter should implement all methods exposed via <code>exports</code> in the sample implementation.</p>
+
+<h2>
+<a name="questions-or-suggestions" class="anchor" href="#questions-or-suggestions"><span class="octicon octicon-link"></span></a>Questions or suggestions?</h2>
+
+<p>If you have any questions, please feel free to create an issue <a href="https://github.com/inikulin/parse5/issues">here on github</a>.</p>
+
+<h2>
+<a name="author" class="anchor" href="#author"><span class="octicon octicon-link"></span></a>Author</h2>
+
+<p><a href="https://github.com/inikulin">Ivan Nikulin</a> (<a href="mailto:ifaaan@gmail.com">ifaaan@gmail.com</a>)</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/inikulin">inikulin</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
