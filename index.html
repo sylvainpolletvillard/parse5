@@ -29,7 +29,8 @@
       </header>
       <section>
         <p align="center">
-  <img src="https://raw.github.com/inikulin/parse5/master/logo.png" alt="parse5"></p>
+  <img src="https://raw.github.com/inikulin/parse5/master/logo.png" alt="parse5">
+</p>
 
 <p><em>WHATWG HTML5 specification-compliant, fast and ready for production HTML parsing/serialization toolset for Node.</em></p>
 
@@ -41,31 +42,32 @@ Existing solutions were either too slow or their output was too inaccurate. So, 
 <ul>
 <li>  <a href="#class-parser">Parser</a> - HTML to DOM-tree parser.</li>
 <li>  <a href="#class-simpleapiparser">SimpleApiParser</a> - <a href="http://en.wikipedia.org/wiki/Simple_API_for_XML">SAX</a>-style parser for HTML.</li>
-<li>  <a href="#class-treeserializer">TreeSerializer</a> - DOM-tree to HTML serializer.</li>
-</ul><h2>
-<a name="install" class="anchor" href="#install"><span class="octicon octicon-link"></span></a>Install</h2>
+<li>  <a href="#class-serializer">Serializer</a> - DOM-tree to HTML code serializer.</li>
+</ul>
+
+<h2>
+<a id="install" class="anchor" href="#install" aria-hidden="true"><span class="octicon octicon-link"></span></a>Install</h2>
 
 <pre><code>$ npm install parse5
 </code></pre>
 
 <h2>
-<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h2>
 
-<div class="highlight highlight-js"><pre><span class="kd">var</span> <span class="nx">Parser</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'parse5'</span><span class="p">).</span><span class="nx">Parser</span><span class="p">;</span>
+<div class="highlight highlight-js"><pre><span class="pl-s">var</span> Parser <span class="pl-k">=</span> <span class="pl-s3">require</span>(<span class="pl-s1"><span class="pl-pds">'</span>parse5<span class="pl-pds">'</span></span>).Parser;
 
-<span class="c1">//Instantiate parser</span>
-<span class="kd">var</span> <span class="nx">parser</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Parser</span><span class="p">();</span>
+<span class="pl-c">//Instantiate parser</span>
+<span class="pl-s">var</span> parser <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">Parser</span>();
 
-<span class="c1">//Then feed it with an HTML document</span>
-<span class="kd">var</span> <span class="nb">document</span> <span class="o">=</span> <span class="nx">parser</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="s1">'&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;Hi there!&lt;/body&gt;&lt;/html&gt;'</span><span class="p">)</span>
+<span class="pl-c">//Then feed it with an HTML document</span>
+<span class="pl-s">var</span> <span class="pl-s3">document</span> <span class="pl-k">=</span> parser.<span class="pl-s3">parse</span>(<span class="pl-s1"><span class="pl-pds">'</span>&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;Hi there!&lt;/body&gt;&lt;/html&gt;<span class="pl-pds">'</span></span>)
 
-<span class="c1">//Now let's parse HTML-snippet</span>
-<span class="kd">var</span> <span class="nx">fragment</span> <span class="o">=</span> <span class="nx">parser</span><span class="p">.</span><span class="nx">parseFragment</span><span class="p">(</span><span class="s1">'&lt;title&gt;Parse5 is &amp;#102;&amp;#117;&amp;#99;&amp;#107;ing awesome!&lt;/title&gt;&lt;h1&gt;42&lt;/h1&gt;'</span><span class="p">);</span>
-
+<span class="pl-c">//Now let's parse HTML-snippet</span>
+<span class="pl-s">var</span> fragment <span class="pl-k">=</span> parser.parseFragment(<span class="pl-s1"><span class="pl-pds">'</span>&lt;title&gt;Parse5 is &amp;#102;&amp;#117;&amp;#99;&amp;#107;ing awesome!&lt;/title&gt;&lt;h1&gt;42&lt;/h1&gt;<span class="pl-pds">'</span></span>);
 </pre></div>
 
 <h2>
-<a name="is-it-fast" class="anchor" href="#is-it-fast"><span class="octicon octicon-link"></span></a>Is it fast?</h2>
+<a id="is-it-fast" class="anchor" href="#is-it-fast" aria-hidden="true"><span class="octicon octicon-link"></span></a>Is it fast?</h2>
 
 <p>Check out <a href="https://github.com/inikulin/node-html-parser-bench">this benchmark</a>.</p>
 
@@ -80,161 +82,194 @@ Fastest is htmlparser2 (https://github.com/fb55/htmlparser2),parse5 (https://git
 <p>So, parse5 is as fast as simple specification incompatible parsers and ~15-times(!) faster than the current specification compatible parser available for the node.</p>
 
 <h2>
-<a name="api-reference" class="anchor" href="#api-reference"><span class="octicon octicon-link"></span></a>API reference</h2>
+<a id="api-reference" class="anchor" href="#api-reference" aria-hidden="true"><span class="octicon octicon-link"></span></a>API reference</h2>
 
 <h3>
-<a name="enum-treeadapters" class="anchor" href="#enum-treeadapters"><span class="octicon octicon-link"></span></a>Enum: TreeAdapters</h3>
+<a id="enum-treeadapters" class="anchor" href="#enum-treeadapters" aria-hidden="true"><span class="octicon octicon-link"></span></a>Enum: TreeAdapters</h3>
 
-<p>Provides built-in tree adapters which can be passed as an optional argument to the <code>Parser</code> and <code>TreeSerializer</code> constructors.</p>
+<p>Provides built-in tree adapters which can be passed as an optional argument to the <code>Parser</code> and <code>Serializer</code> constructors.</p>
 
 <h4>
-<a name="-treeadaptersdefault" class="anchor" href="#-treeadaptersdefault"><span class="octicon octicon-link"></span></a>• TreeAdapters.default</h4>
+<a id="-treeadaptersdefault" class="anchor" href="#-treeadaptersdefault" aria-hidden="true"><span class="octicon octicon-link"></span></a>• TreeAdapters.default</h4>
 
 <p>Default tree format for parse5.</p>
 
 <h4>
-<a name="-treeadaptershtmlparser2" class="anchor" href="#-treeadaptershtmlparser2"><span class="octicon octicon-link"></span></a>• TreeAdapters.htmlparser2</h4>
+<a id="-treeadaptershtmlparser2" class="anchor" href="#-treeadaptershtmlparser2" aria-hidden="true"><span class="octicon octicon-link"></span></a>• TreeAdapters.htmlparser2</h4>
 
-<p>Quite popular <a href="https://github.com/fb55/htmlparser2">htmlparser2</a> tree format (e.g. used in <a href="https://github.com/MatthewMueller/cheerio">cheerio</a> and <a href="https://github.com/tmpvar/jsdom">jsdom</a>).  </p>
+<p>Quite popular <a href="https://github.com/fb55/htmlparser2">htmlparser2</a> tree format (e.g. used in <a href="https://github.com/MatthewMueller/cheerio">cheerio</a> and <a href="https://github.com/tmpvar/jsdom">jsdom</a>).</p>
 
-<hr><h3>
-<a name="class-parser" class="anchor" href="#class-parser"><span class="octicon octicon-link"></span></a>Class: Parser</h3>
+<hr>
+
+<h3>
+<a id="class-parser" class="anchor" href="#class-parser" aria-hidden="true"><span class="octicon octicon-link"></span></a>Class: Parser</h3>
 
 <p>Provides HTML parsing functionality.</p>
 
 <h4>
-<a name="-parserctortreeadapter" class="anchor" href="#-parserctortreeadapter"><span class="octicon octicon-link"></span></a>• Parser.ctor([treeAdapter])</h4>
+<a id="-parserctortreeadapter-options" class="anchor" href="#-parserctortreeadapter-options" aria-hidden="true"><span class="octicon octicon-link"></span></a>• Parser.ctor([treeAdapter, options])</h4>
 
 <p>Creates new reusable instance of the <code>Parser</code>. Optional <code>treeAdapter</code> argument specifies resulting tree format. If <code>treeAdapter</code> argument is not specified, <code>default</code> tree adapter will be used.</p>
 
+<p><code>options</code> object provides the parsing algorithm modifications:</p>
+
+<h5>
+<a id="optionsdecodehtmlentities" class="anchor" href="#optionsdecodehtmlentities" aria-hidden="true"><span class="octicon octicon-link"></span></a>options.decodeHtmlEntities</h5>
+
+<p>Decode HTML-entities like <code>&amp;amp;</code>, <code>&amp;nbsp;</code>, etc.  Default: <code>true</code>. <strong>Warning:</strong> disabling this option may cause output which is not conform HTML5 specification.</p>
+
+<h5>
+<a id="optionslocationinfo" class="anchor" href="#optionslocationinfo" aria-hidden="true"><span class="octicon octicon-link"></span></a>options.locationInfo</h5>
+
+<p>Enables source code location information for the nodes. Default: <code>false</code>. When enabled, each node (except root node) has <code>__location</code> property, which contains <code>start</code> and <code>end</code> indices of the node in the source code.</p>
+
 <p><em>Example:</em></p>
 
-<div class="highlight highlight-js"><pre><span class="kd">var</span> <span class="nx">parse5</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'parse5'</span><span class="p">);</span>
+<div class="highlight highlight-js"><pre><span class="pl-s">var</span> parse5 <span class="pl-k">=</span> <span class="pl-s3">require</span>(<span class="pl-s1"><span class="pl-pds">'</span>parse5<span class="pl-pds">'</span></span>);
 
-<span class="c1">//Instantiate new parser with default tree adapter</span>
-<span class="kd">var</span> <span class="nx">parser1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">parse5</span><span class="p">.</span><span class="nx">Parser</span><span class="p">();</span>
+<span class="pl-c">//Instantiate new parser with default tree adapter</span>
+<span class="pl-s">var</span> parser1 <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">parse5.Parser</span>();
 
-<span class="c1">//Instantiate new parser with htmlparser2 tree adapter</span>
-<span class="kd">var</span> <span class="nx">parser2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">parse5</span><span class="p">.</span><span class="nx">Parser</span><span class="p">(</span><span class="nx">parse5</span><span class="p">.</span><span class="nx">TreeAdapters</span><span class="p">.</span><span class="nx">htmlparser2</span><span class="p">);</span>
-</pre></div>
+<span class="pl-c">//Instantiate new parser with htmlparser2 tree adapter</span>
+<span class="pl-s">var</span> parser2 <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">parse5.Parser</span>(parse5.TreeAdapters.htmlparser2);</pre></div>
 
 <h4>
-<a name="-parserparsehtml" class="anchor" href="#-parserparsehtml"><span class="octicon octicon-link"></span></a>• Parser.parse(html)</h4>
+<a id="-parserparsehtml" class="anchor" href="#-parserparsehtml" aria-hidden="true"><span class="octicon octicon-link"></span></a>• Parser.parse(html)</h4>
 
 <p>Parses specified <code>html</code> string. Returns <code>document</code> node.</p>
 
 <p><em>Example:</em></p>
 
-<div class="highlight highlight-js"><pre><span class="kd">var</span> <span class="nb">document</span> <span class="o">=</span> <span class="nx">parser</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="s1">'&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;Hi there!&lt;/body&gt;&lt;/html&gt;'</span><span class="p">);</span>
-</pre></div>
+<div class="highlight highlight-js"><pre><span class="pl-s">var</span> <span class="pl-s3">document</span> <span class="pl-k">=</span> parser.<span class="pl-s3">parse</span>(<span class="pl-s1"><span class="pl-pds">'</span>&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;Hi there!&lt;/body&gt;&lt;/html&gt;<span class="pl-pds">'</span></span>);</pre></div>
 
 <h4>
-<a name="-parserparsefragmenthtmlfragment-contextelement" class="anchor" href="#-parserparsefragmenthtmlfragment-contextelement"><span class="octicon octicon-link"></span></a>• Parser.parseFragment(htmlFragment, [contextElement])</h4>
+<a id="-parserparsefragmenthtmlfragment-contextelement" class="anchor" href="#-parserparsefragmenthtmlfragment-contextelement" aria-hidden="true"><span class="octicon octicon-link"></span></a>• Parser.parseFragment(htmlFragment, [contextElement])</h4>
 
-<p>Parses given <code>htmlFragment</code>. Returns <code>documentFragment</code> node. Optional <code>contextElement</code> argument specifies context in which given <code>htmlFragment</code> will be parsed (consider it as setting <code>contextElement.innerHTML</code> property). If <code>contextElement</code> argument is not specified, <code>&lt;div&gt;</code> element will be used.</p>
+<p>Parses given <code>htmlFragment</code>. Returns <code>documentFragment</code> node. Optional <code>contextElement</code> argument specifies context in which given <code>htmlFragment</code> will be parsed (consider it as setting <code>contextElement.innerHTML</code> property). If <code>contextElement</code> argument is not specified then <code>&lt;template&gt;</code> element will be used as a context and fragment will be parsed in 'forgiving' manner.</p>
 
 <p><em>Example:</em></p>
 
-<div class="highlight highlight-js"><pre><span class="kd">var</span> <span class="nx">documentFragment</span> <span class="o">=</span> <span class="nx">parser</span><span class="p">.</span><span class="nx">parseFragment</span><span class="p">(</span><span class="s1">'&lt;table&gt;&lt;/table&gt;'</span><span class="p">);</span>
+<div class="highlight highlight-js"><pre><span class="pl-s">var</span> documentFragment <span class="pl-k">=</span> parser.parseFragment(<span class="pl-s1"><span class="pl-pds">'</span>&lt;table&gt;&lt;/table&gt;<span class="pl-pds">'</span></span>);
 
-<span class="c1">//Parse html fragment in context of the parsed &lt;table&gt; element</span>
-<span class="kd">var</span> <span class="nx">trFragment</span> <span class="o">=</span> <span class="nx">parser</span><span class="p">.</span><span class="nx">parseFragment</span><span class="p">(</span><span class="s1">'&lt;tr&gt;&lt;td&gt;Shake it, baby&lt;/td&gt;&lt;/tr&gt;'</span><span class="p">,</span> <span class="nx">documentFragment</span><span class="p">.</span><span class="nx">childNodes</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
-</pre></div>
+<span class="pl-c">//Parse html fragment in context of the parsed &lt;table&gt; element</span>
+<span class="pl-s">var</span> trFragment <span class="pl-k">=</span> parser.parseFragment(<span class="pl-s1"><span class="pl-pds">'</span>&lt;tr&gt;&lt;td&gt;Shake it, baby&lt;/td&gt;&lt;/tr&gt;<span class="pl-pds">'</span></span>, documentFragment.<span class="pl-sc">childNodes</span>[<span class="pl-c1">0</span>]);</pre></div>
 
-<hr><h3>
-<a name="class-simpleapiparser" class="anchor" href="#class-simpleapiparser"><span class="octicon octicon-link"></span></a>Class: SimpleApiParser</h3>
+<hr>
+
+<h3>
+<a id="class-simpleapiparser" class="anchor" href="#class-simpleapiparser" aria-hidden="true"><span class="octicon octicon-link"></span></a>Class: SimpleApiParser</h3>
 
 <p>Provides <a href="https://en.wikipedia.org/wiki/Simple_API_for_XML">SAX</a>-style HTML parsing functionality.</p>
 
 <h4>
-<a name="-simpleapiparserctorhandlers" class="anchor" href="#-simpleapiparserctorhandlers"><span class="octicon octicon-link"></span></a>• SimpleApiParser.ctor(handlers)</h4>
+<a id="-simpleapiparserctorhandlers-options" class="anchor" href="#-simpleapiparserctorhandlers-options" aria-hidden="true"><span class="octicon octicon-link"></span></a>• SimpleApiParser.ctor(handlers, [options])</h4>
 
 <p>Creates new reusable instance of the <code>SimpleApiParser</code>. <code>handlers</code> argument specifies object that contains parser's event handlers. Possible events and their signatures are shown in the example.</p>
 
+<p><code>options</code> object provides the parsing algorithm modifications:</p>
+
+<h5>
+<a id="optionsdecodehtmlentities-1" class="anchor" href="#optionsdecodehtmlentities-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>options.decodeHtmlEntities</h5>
+
+<p>Decode HTML-entities like <code>&amp;amp;</code>, <code>&amp;nbsp;</code>, etc.  Default: <code>true</code>. <strong>Warning:</strong> disabling this option may cause output which is not conform HTML5 specification.</p>
+
+<h5>
+<a id="optionslocationinfo-1" class="anchor" href="#optionslocationinfo-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>options.locationInfo</h5>
+
+<p>Enables source code location information for the tokens. Default: <code>false</code>. When enabled, each node handler receives <code>location</code> object as it's last argument. <code>location</code> object contains <code>start</code> and <code>end</code> indices of the token in the source code.</p>
+
 <p><em>Example:</em></p>
 
-<div class="highlight highlight-js"><pre><span class="kd">var</span> <span class="nx">parse5</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'parse5'</span><span class="p">);</span>
+<div class="highlight highlight-js"><pre><span class="pl-s">var</span> parse5 <span class="pl-k">=</span> <span class="pl-s3">require</span>(<span class="pl-s1"><span class="pl-pds">'</span>parse5<span class="pl-pds">'</span></span>);
 
-<span class="kd">var</span> <span class="nx">parser</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">parse5</span><span class="p">.</span><span class="nx">SimpleApiParser</span><span class="p">({</span>
-    <span class="nx">doctype</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">publicId</span><span class="p">,</span> <span class="nx">systemId</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">//Handle doctype here</span>
-    <span class="p">},</span>
+<span class="pl-s">var</span> parser <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">parse5.SimpleApiParser</span>({
+    <span class="pl-en">doctype</span>: <span class="pl-st">function</span>(<span class="pl-vpf">name</span>, <span class="pl-vpf">publicId</span>, <span class="pl-vpf">systemId</span> /*, [<span class="pl-vpf">location</span>] */) {
+        <span class="pl-c">//Handle doctype here</span>
+    },
 
-    <span class="nx">startTag</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">tagName</span><span class="p">,</span> <span class="nx">attrs</span><span class="p">,</span> <span class="nx">selfClosing</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">//Handle start tags here</span>
-    <span class="p">},</span>
+    <span class="pl-en">startTag</span>: <span class="pl-st">function</span>(<span class="pl-vpf">tagName</span>, <span class="pl-vpf">attrs</span>, <span class="pl-vpf">selfClosing</span> /*, [<span class="pl-vpf">location</span>] */) {
+        <span class="pl-c">//Handle start tags here</span>
+    },
 
-    <span class="nx">endTag</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">tagName</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">//Handle end tags here</span>
-    <span class="p">},</span>
+    <span class="pl-en">endTag</span>: <span class="pl-st">function</span>(<span class="pl-vpf">tagName</span> /*, [<span class="pl-vpf">location</span>] */) {
+        <span class="pl-c">//Handle end tags here</span>
+    },
 
-    <span class="nx">text</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">text</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">//Handle texts here</span>
-    <span class="p">},</span>
+    <span class="pl-en">text</span>: <span class="pl-st">function</span>(<span class="pl-vpf">text</span> /*, [<span class="pl-vpf">location</span>] */) {
+        <span class="pl-c">//Handle texts here</span>
+    },
 
-    <span class="nx">comment</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">text</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">//Handle comments here</span>
-    <span class="p">}</span>
-<span class="p">});</span>
-</pre></div>
+    <span class="pl-en">comment</span>: <span class="pl-st">function</span>(<span class="pl-vpf">text</span> /*, [<span class="pl-vpf">location</span>] */) {
+        <span class="pl-c">//Handle comments here</span>
+    }
+});</pre></div>
 
 <h4>
-<a name="-simpleapiparserparsehtml" class="anchor" href="#-simpleapiparserparsehtml"><span class="octicon octicon-link"></span></a>• SimpleApiParser.parse(html)</h4>
+<a id="-simpleapiparserparsehtml" class="anchor" href="#-simpleapiparserparsehtml" aria-hidden="true"><span class="octicon octicon-link"></span></a>• SimpleApiParser.parse(html)</h4>
 
 <p>Raises parser events for the given <code>html</code>.</p>
 
 <p><em>Example:</em></p>
 
-<div class="highlight highlight-js"><pre><span class="kd">var</span> <span class="nx">parse5</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'parse5'</span><span class="p">);</span>
+<div class="highlight highlight-js"><pre><span class="pl-s">var</span> parse5 <span class="pl-k">=</span> <span class="pl-s3">require</span>(<span class="pl-s1"><span class="pl-pds">'</span>parse5<span class="pl-pds">'</span></span>);
 
-<span class="kd">var</span> <span class="nx">parser</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">parse5</span><span class="p">.</span><span class="nx">SimpleApiParser</span><span class="p">({</span>
-    <span class="nx">text</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">text</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">text</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">});</span>
+<span class="pl-s">var</span> parser <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">parse5.SimpleApiParser</span>({
+    <span class="pl-en">text</span>: <span class="pl-st">function</span>(<span class="pl-vpf">text</span>) {
+        <span class="pl-en">console</span><span class="pl-s3">.log</span>(text);
+    }
+});
 
-<span class="nx">parser</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="s1">'&lt;body&gt;Yo!&lt;/body&gt;'</span><span class="p">);</span>
-</pre></div>
+parser.<span class="pl-s3">parse</span>(<span class="pl-s1"><span class="pl-pds">'</span>&lt;body&gt;Yo!&lt;/body&gt;<span class="pl-pds">'</span></span>);</pre></div>
 
-<hr><h3>
-<a name="class-treeserializer" class="anchor" href="#class-treeserializer"><span class="octicon octicon-link"></span></a>Class: TreeSerializer</h3>
+<hr>
 
-<p>Provides tree-to-HTML serialization functionality.</p>
+<h3>
+<a id="class-serializer" class="anchor" href="#class-serializer" aria-hidden="true"><span class="octicon octicon-link"></span></a>Class: Serializer</h3>
+
+<p>Provides tree-to-HTML serialization functionality.
+<strong>Note:</strong> prior to v1.2.0 this class was called <code>TreeSerializer</code>. However, it's still accessible as <code>parse5.TreeSerializer</code> for backward compatibility.</p>
 
 <h4>
-<a name="-treeserializerctortreeadapter" class="anchor" href="#-treeserializerctortreeadapter"><span class="octicon octicon-link"></span></a>• TreeSerializer.ctor([treeAdapter])</h4>
+<a id="-serializerctortreeadapter-options" class="anchor" href="#-serializerctortreeadapter-options" aria-hidden="true"><span class="octicon octicon-link"></span></a>• Serializer.ctor([treeAdapter, options])</h4>
 
-<p>Creates new reusable instance of the <code>TreeSerializer</code>. Optional <code>treeAdapter</code> argument specifies input tree format. If <code>treeAdapter</code> argument is not specified, <code>default</code> tree adapter will be used.</p>
+<p>Creates new reusable instance of the <code>Serializer</code>. Optional <code>treeAdapter</code> argument specifies input tree format. If <code>treeAdapter</code> argument is not specified, <code>default</code> tree adapter will be used.</p>
+
+<p><code>options</code> object provides the serialization algorithm modifications:</p>
+
+<h5>
+<a id="optionsencodehtmlentities" class="anchor" href="#optionsencodehtmlentities" aria-hidden="true"><span class="octicon octicon-link"></span></a>options.encodeHtmlEntities</h5>
+
+<p>HTML-encode characters like <code>&lt;</code>, <code>&gt;</code>, <code>&amp;</code>, etc.  Default: <code>true</code>.  <strong>Warning:</strong> disabling this option may cause output which is not conform HTML5 specification.</p>
 
 <p><em>Example:</em></p>
 
-<div class="highlight highlight-js"><pre><span class="kd">var</span> <span class="nx">parse5</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'parse5'</span><span class="p">);</span>
+<div class="highlight highlight-js"><pre><span class="pl-s">var</span> parse5 <span class="pl-k">=</span> <span class="pl-s3">require</span>(<span class="pl-s1"><span class="pl-pds">'</span>parse5<span class="pl-pds">'</span></span>);
 
-<span class="c1">//Instantiate new serializer with default tree adapter</span>
-<span class="kd">var</span> <span class="nx">serializer1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">parse5</span><span class="p">.</span><span class="nx">TreeSerializer</span><span class="p">();</span>
+<span class="pl-c">//Instantiate new serializer with default tree adapter</span>
+<span class="pl-s">var</span> serializer1 <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">parse5.Serializer</span>();
 
-<span class="c1">//Instantiate new serializer with htmlparser2 tree adapter</span>
-<span class="kd">var</span> <span class="nx">serializer2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">parse5</span><span class="p">.</span><span class="nx">TreeSerializer</span><span class="p">(</span><span class="nx">parse5</span><span class="p">.</span><span class="nx">TreeAdapters</span><span class="p">.</span><span class="nx">htmlparser2</span><span class="p">);</span>
-</pre></div>
+<span class="pl-c">//Instantiate new serializer with htmlparser2 tree adapter</span>
+<span class="pl-s">var</span> serializer2 <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">parse5.Serializer</span>(parse5.TreeAdapters.htmlparser2);</pre></div>
 
 <h4>
-<a name="-treeserializerserializenode" class="anchor" href="#-treeserializerserializenode"><span class="octicon octicon-link"></span></a>• TreeSerializer.serialize(node)</h4>
+<a id="-serializerserializenode" class="anchor" href="#-serializerserializenode" aria-hidden="true"><span class="octicon octicon-link"></span></a>• Serializer.serialize(node)</h4>
 
 <p>Serializes the given <code>node</code>. Returns HTML string.</p>
 
 <p><em>Example:</em></p>
 
-<div class="highlight highlight-js"><pre><span class="kd">var</span> <span class="nb">document</span> <span class="o">=</span> <span class="nx">parser</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="s1">'&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;Hi there!&lt;/body&gt;&lt;/html&gt;'</span><span class="p">);</span>
+<div class="highlight highlight-js"><pre><span class="pl-s">var</span> <span class="pl-s3">document</span> <span class="pl-k">=</span> parser.<span class="pl-s3">parse</span>(<span class="pl-s1"><span class="pl-pds">'</span>&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;Hi there!&lt;/body&gt;&lt;/html&gt;<span class="pl-pds">'</span></span>);
 
-<span class="c1">//Serialize document</span>
-<span class="kd">var</span> <span class="nx">html</span> <span class="o">=</span> <span class="nx">serializer</span><span class="p">.</span><span class="nx">serialize</span><span class="p">(</span><span class="nb">document</span><span class="p">);</span>
+<span class="pl-c">//Serialize document</span>
+<span class="pl-s">var</span> html <span class="pl-k">=</span> serializer.serialize(<span class="pl-s3">document</span>);
 
-<span class="c1">//Serialize &lt;body&gt; element content</span>
-<span class="kd">var</span> <span class="nx">bodyInnerHtml</span> <span class="o">=</span> <span class="nx">serializer</span><span class="p">.</span><span class="nx">serialize</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">childNodes</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">childNodes</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
-</pre></div>
+<span class="pl-c">//Serialize &lt;body&gt; element content</span>
+<span class="pl-s">var</span> bodyInnerHtml <span class="pl-k">=</span> serializer.serialize(<span class="pl-s3">document</span>.<span class="pl-sc">childNodes</span>[<span class="pl-c1">0</span>].<span class="pl-sc">childNodes</span>[<span class="pl-c1">1</span>]);</pre></div>
 
-<hr><h2>
-<a name="testing" class="anchor" href="#testing"><span class="octicon octicon-link"></span></a>Testing</h2>
+<hr>
+
+<h2>
+<a id="testing" class="anchor" href="#testing" aria-hidden="true"><span class="octicon octicon-link"></span></a>Testing</h2>
 
 <p>Test data is adopted from <a href="https://github.com/html5lib">html5lib project</a>. Parser is covered by more than 8000 test cases.
 To run tests:</p>
@@ -243,31 +278,30 @@ To run tests:</p>
 </code></pre>
 
 <h2>
-<a name="custom-tree-adapter" class="anchor" href="#custom-tree-adapter"><span class="octicon octicon-link"></span></a>Custom tree adapter</h2>
+<a id="custom-tree-adapter" class="anchor" href="#custom-tree-adapter" aria-hidden="true"><span class="octicon octicon-link"></span></a>Custom tree adapter</h2>
 
 <p>You can create a custom tree adapter so parse5 can work with your own DOM-tree implementation.
 Just pass your adapter implementation to the parser's constructor as an argument:</p>
 
-<div class="highlight highlight-js"><pre><span class="kd">var</span> <span class="nx">Parser</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'parse5'</span><span class="p">).</span><span class="nx">Parser</span><span class="p">;</span>
+<div class="highlight highlight-js"><pre><span class="pl-s">var</span> Parser <span class="pl-k">=</span> <span class="pl-s3">require</span>(<span class="pl-s1"><span class="pl-pds">'</span>parse5<span class="pl-pds">'</span></span>).Parser;
 
-<span class="kd">var</span> <span class="nx">myTreeAdapter</span> <span class="o">=</span> <span class="p">{</span>
-   <span class="c1">//Adapter methods...</span>
-<span class="p">};</span>
+<span class="pl-s">var</span> myTreeAdapter <span class="pl-k">=</span> {
+   <span class="pl-c">//Adapter methods...</span>
+};
 
-<span class="c1">//Instantiate parser</span>
-<span class="kd">var</span> <span class="nx">parser</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Parser</span><span class="p">(</span><span class="nx">myTreeAdapter</span><span class="p">);</span>
-</pre></div>
+<span class="pl-c">//Instantiate parser</span>
+<span class="pl-s">var</span> parser <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">Parser</span>(myTreeAdapter);</pre></div>
 
 <p>Sample implementation can be found <a href="https://github.com/inikulin/parse5/blob/master/lib/tree_adapters/default.js">here</a>.
 The custom tree adapter should implement all methods exposed via <code>exports</code> in the sample implementation.</p>
 
 <h2>
-<a name="questions-or-suggestions" class="anchor" href="#questions-or-suggestions"><span class="octicon octicon-link"></span></a>Questions or suggestions?</h2>
+<a id="questions-or-suggestions" class="anchor" href="#questions-or-suggestions" aria-hidden="true"><span class="octicon octicon-link"></span></a>Questions or suggestions?</h2>
 
 <p>If you have any questions, please feel free to create an issue <a href="https://github.com/inikulin/parse5/issues">here on github</a>.</p>
 
 <h2>
-<a name="author" class="anchor" href="#author"><span class="octicon octicon-link"></span></a>Author</h2>
+<a id="author" class="anchor" href="#author" aria-hidden="true"><span class="octicon octicon-link"></span></a>Author</h2>
 
 <p><a href="https://github.com/inikulin">Ivan Nikulin</a> (<a href="mailto:ifaaan@gmail.com">ifaaan@gmail.com</a>)</p>
       </section>
