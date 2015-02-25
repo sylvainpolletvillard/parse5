@@ -121,7 +121,7 @@ Fastest is htmlparser2 (https://github.com/fb55/htmlparser2),parse5 (https://git
 <h5>
 <a id="optionslocationinfo" class="anchor" href="#optionslocationinfo" aria-hidden="true"><span class="octicon octicon-link"></span></a>options.locationInfo</h5>
 
-<p>Enables source code location information for the nodes. Default: <code>false</code>. When enabled, each node (except root node) has <code>__location</code> property, which contains <code>start</code> and <code>end</code> indices of the node in the source code.</p>
+<p>Enables source code location information for the nodes. Default: <code>false</code>. When enabled, each node (except root node) has <code>__location</code> property, which contains <code>start</code> and <code>end</code> indices of the node in the source code. If element was implicitly created by the parser it's <code>__location</code> property will be <code>null</code>.</p>
 
 <p><em>Example:</em></p>
 
