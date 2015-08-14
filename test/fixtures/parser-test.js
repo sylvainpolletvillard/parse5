@@ -1,6 +1,5 @@
 var assert = require('assert'),
     path = require('path'),
-    HTML = require('../../lib/common/html'),
     parse5 = require('../../index'),
     Parser = parse5.Parser,
     Serializer = parse5.Serializer,
@@ -118,7 +117,7 @@ TestUtils.generateTestsForEachTreeAdapter(module.exports, function (_test, treeA
 
         //NOTE: location info for all implicitly generated elements should be null
         walkTree(document, function (node) {
-            if (treeAdapter.getTagName(node) !== HTML.TAG_NAMES.DIV)
+            if (treeAdapter.getTagName(node) !== 'div')
                 assert.strictEqual(node.__location, null);
         });
     };

@@ -4,8 +4,7 @@ var assert = require('assert'),
     TestUtils = require('../test_utils');
 
 //Aliases
-var $ = html.TAG_NAMES,
-    NS = html.NAMESPACES;
+var NS = html.NAMESPACES;
 
 TestUtils.generateTestsForEachTreeAdapter(module.exports, function (_test, treeAdapter) {
     _test['Insert marker'] = function () {
@@ -24,8 +23,8 @@ TestUtils.generateTestsForEachTreeAdapter(module.exports, function (_test, treeA
         var list = new FormattingElementList(treeAdapter),
             element1Token = 'token1',
             element2Token = 'token2',
-            element1 = treeAdapter.createElement($.DIV, NS.HTML, []),
-            element2 = treeAdapter.createElement($.P, NS.HTML, []);
+            element1 = treeAdapter.createElement('div', NS.HTML, []),
+            element2 = treeAdapter.createElement('p', NS.HTML, []);
 
         list.pushElement(element1, element1Token);
         assert.strictEqual(list.length, 1);
@@ -43,10 +42,10 @@ TestUtils.generateTestsForEachTreeAdapter(module.exports, function (_test, treeA
     _test['Insert element after bookmark'] = function () {
         var list = new FormattingElementList(treeAdapter),
             token = 'token1',
-            element1 = treeAdapter.createElement($.DIV, NS.HTML, []),
-            element2 = treeAdapter.createElement($.P, NS.HTML, []),
-            element3 = treeAdapter.createElement($.SPAN, NS.HTML, []),
-            element4 = treeAdapter.createElement($.TITLE, NS.HTML, []);
+            element1 = treeAdapter.createElement('div', NS.HTML, []),
+            element2 = treeAdapter.createElement('p', NS.HTML, []),
+            element3 = treeAdapter.createElement('span', NS.HTML, []),
+            element4 = treeAdapter.createElement('title', NS.HTML, []);
 
         list.pushElement(element1, token);
         list.bookmark = list.entries[0];
@@ -68,11 +67,11 @@ TestUtils.generateTestsForEachTreeAdapter(module.exports, function (_test, treeA
             token4 = 'token4',
             token5 = 'token5',
             token6 = 'token6',
-            element1 = treeAdapter.createElement($.DIV, NS.HTML, [
+            element1 = treeAdapter.createElement('div', NS.HTML, [
                 {name: 'attr1', value: 'val1'},
                 {name: 'attr2', value: 'val2'}
             ]),
-            element2 = treeAdapter.createElement($.DIV, NS.HTML, [
+            element2 = treeAdapter.createElement('div', NS.HTML, [
                 {name: 'attr1', value: 'val1'},
                 {name: 'attr2', value: 'someOtherValue'}
             ]);
@@ -111,11 +110,11 @@ TestUtils.generateTestsForEachTreeAdapter(module.exports, function (_test, treeA
     _test['Clear to the last marker'] = function () {
         var list = new FormattingElementList(treeAdapter),
             token = 'token',
-            element1 = treeAdapter.createElement($.DIV, NS.HTML, [
+            element1 = treeAdapter.createElement('div', NS.HTML, [
                 {name: 'attr1', value: 'val1'},
                 {name: 'attr2', value: 'val2'}
             ]),
-            element2 = treeAdapter.createElement($.DIV, NS.HTML, [
+            element2 = treeAdapter.createElement('div', NS.HTML, [
                 {name: 'attr1', value: 'val1'},
                 {name: 'attr2', value: 'someOtherValue'}
             ]);
@@ -135,11 +134,11 @@ TestUtils.generateTestsForEachTreeAdapter(module.exports, function (_test, treeA
     _test['Remove entry'] = function () {
         var list = new FormattingElementList(treeAdapter),
             token = 'token',
-            element1 = treeAdapter.createElement($.DIV, NS.HTML, [
+            element1 = treeAdapter.createElement('div', NS.HTML, [
                 {name: 'attr1', value: 'val1'},
                 {name: 'attr2', value: 'val2'}
             ]),
-            element2 = treeAdapter.createElement($.DIV, NS.HTML, [
+            element2 = treeAdapter.createElement('div', NS.HTML, [
                 {name: 'attr1', value: 'val1'},
                 {name: 'attr2', value: 'someOtherValue'}
             ]);
@@ -159,26 +158,26 @@ TestUtils.generateTestsForEachTreeAdapter(module.exports, function (_test, treeA
     _test['Get entry in scope with given tag name'] = function () {
         var list = new FormattingElementList(treeAdapter),
             token = 'token',
-            element = treeAdapter.createElement($.DIV, NS.HTML, []);
+            element = treeAdapter.createElement('div', NS.HTML, []);
 
-        assert.ok(!list.getElementEntryInScopeWithTagName($.DIV));
+        assert.ok(!list.getElementEntryInScopeWithTagName('div'));
 
         list.pushElement(element, token);
         list.pushElement(element, token);
-        assert.strictEqual(list.getElementEntryInScopeWithTagName($.DIV), list.entries[1]);
+        assert.strictEqual(list.getElementEntryInScopeWithTagName('div'), list.entries[1]);
 
         list.insertMarker();
-        assert.ok(!list.getElementEntryInScopeWithTagName($.DIV));
+        assert.ok(!list.getElementEntryInScopeWithTagName('div'));
 
         list.pushElement(element, token);
-        assert.strictEqual(list.getElementEntryInScopeWithTagName($.DIV), list.entries[3]);
+        assert.strictEqual(list.getElementEntryInScopeWithTagName('div'), list.entries[3]);
     };
 
     _test['Get element entry'] = function () {
         var list = new FormattingElementList(treeAdapter),
             token = 'token',
-            element1 = treeAdapter.createElement($.DIV, NS.HTML, []),
-            element2 = treeAdapter.createElement($.A, NS.HTML, []);
+            element1 = treeAdapter.createElement('div', NS.HTML, []),
+            element2 = treeAdapter.createElement('a', NS.HTML, []);
 
         list.pushElement(element2, token);
         list.pushElement(element1, token);
