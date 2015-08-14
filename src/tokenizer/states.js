@@ -1,0 +1,37 @@
+/*
+export default {
+    'data',
+    'characterReference',
+    'RCDATA',
+    'characterReferenceInRCDATA',
+    'RAWTEXT',
+    'scriptData',
+    'PLAINTEXT',
+    'tagOpen',
+    'endTagOpen',
+    'tagName',
+    'RCDATALessThanSign',
+    'RCDATAEndTagOpen',
+    'RCDATAEndTagNameState',
+    'RAWTEXTLessThanSignState',
+    'RAWTEXTEndTagOpenState',
+    'RAWTEXTEndTagNameState',
+    'scriptDataLessThanSignState',
+    'scriptDataEndTagOpenState',
+    'scriptDataEndTagNameState',
+    'scriptDataEscapeStartState',
+    'scriptDataEscapesStartDashState',
+    'scriptDataEscapedState',
+    'scriptDataEscapedDashState',
+    'scriptDataEscapedDashDashState',
+    'scriptDataEscapedLessThanSignState',
+    'scriptDataEscapedEndTagOpenState',
+    'scriptDataEscapedEntTagNameState',
+    'scriptDataDoubleEscapeStartState',
+    'scriptDataDoubleEscapedState',
+    'scriptDataDoubleEscapedDashState',
+    'scriptDataDoubleEscapedDashDashState',
+    'scriptDataDoubleEscapedLessThanSignState'
+
+};
+*/

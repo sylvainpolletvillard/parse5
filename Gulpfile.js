@@ -55,10 +55,10 @@ gulp.task('generate-trie', function () {
     }
 
     return gulp
-        .src('src/tokenization/entities.json')
+        .src('src/tokenizer/entities.json')
         .pipe(through.obj(trieGenerator))
         .pipe(rename('named-entity-trie.js'))
-        .pipe(gulp.dest('lib/tokenization'));
+        .pipe(gulp.dest('lib/tokenizer'));
 });
 
 gulp.task('install-upstream-parse5', function () {

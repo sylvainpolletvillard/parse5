@@ -1,21 +1,9 @@
-import { CODE_POINTS as $ } from '../common/unicode';
-
-//Utils
-
-//OPTIMIZATION: these utility functions should not be moved out of this module. V8 Crankshaft will not inline
-//this functions if they will be situated in another module due to context switch.
-//Always perform inlining check before modifying this functions ('node --trace-inlining').
-function isReservedCodePoint (cp) {
-    return cp >= 0xD800 && cp <= 0xDFFF || cp > 0x10FFFF;
-}
-
-function isSurrogatePair (cp1, cp2) {
-    return cp1 >= 0xD800 && cp1 <= 0xDBFF && cp2 >= 0xDC00 && cp2 <= 0xDFFF;
-}
-
-function getSurrogatePairCodePoint (cp1, cp2) {
-    return (cp1 - 0xD800) * 0x400 + 0x2400 + cp2;
-}
+import { CODE_POINTS as $ } from '../utils/unicode';
+import {
+    isReservedCodePoint,
+    isSurrogatePair,
+    getSurrogatePairCodePoint
+} from '../utils/unicode';
 
 
 //Preprocessor
@@ -50,7 +38,7 @@ export default class Preprocessor {
         }
 
         if (isReservedCodePoint(cp))
-            cp = $.REPLACEMENT_CHARACTER;
+            cp = $.replacementCharacter;
 
         return cp;
     }
@@ -84,16 +72,16 @@ export default class Preprocessor {
 
         //NOTE: any U+000A LINE FEED (LF) characters that immediately follow a U+000D CARRIAGE RETURN (CR) character
         //must be ignored.
-        if (this.skipNextNewLine && cp === $.LINE_FEED) {
+        if (this.skipNextNewLine && cp === $.LF) {
             this.skipNextNewLine = false;
             this._addGap();
             return this.advanceAndPeekCodePoint();
         }
 
         //NOTE: all U+000D CARRIAGE RETURN (CR) characters must be converted to U+000A LINE FEED (LF) characters
-        if (cp === $.CARRIAGE_RETURN) {
+        if (cp === $.CR) {
             this.skipNextNewLine = true;
-            return $.LINE_FEED;
+            return $.LF;
         }
 
         this.skipNextNewLine = false;
