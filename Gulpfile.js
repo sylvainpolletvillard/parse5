@@ -5,7 +5,6 @@ var install   = require('gulp-install');
 var benchmark = require('gulp-benchmark');
 var rename    = require('gulp-rename');
 var through   = require('through2');
-var sequence  = require('gulp-sequence');
 
 
 gulp.task('generate-trie', function () {
@@ -62,6 +61,21 @@ gulp.task('generate-trie', function () {
         .pipe(gulp.dest('lib/tokenization'));
 });
 
+gulp.task('install-upstream-parse5', function () {
+    return gulp
+        .src('test/benchmark/package.json')
+        .pipe(install());
+});
+
+gulp.task('benchmark', ['build', 'install-upstream-parse5'], function () {
+    return gulp
+        .src('test/benchmark/index.js', { read: false })
+        .pipe(benchmark({
+            failOnError: true,
+            reporters:   benchmark.reporters.etalon('Upstream')
+        }));
+});
+
 gulp.task('build', ['generate-trie'], function () {
     return gulp
         .src('src/**/*.js')
@@ -78,22 +92,3 @@ gulp.task('test', ['build'], function () {
             timeout:  typeof v8debug === 'undefined' ? 2000 : Infinity // NOTE: disable timeouts in debug
         }));
 });
-
-gulp.task('install-upstream-parse5', function () {
-    return gulp
-        .src('test/benchmark/package.json')
-        .pipe(install());
-});
-
-gulp.task('benchmark', ['build', 'install-upstream-parse5'], function () {
-    return gulp
-        .src('test/benchmark/index.js', { read: false })
-        .pipe(benchmark({
-            failOnError: true,
-            reporters:   benchmark.reporters.etalon('Upstream')
-        }));
-});
-
-// NOTE: running 'benchmark' after 'test' somehow
-// affects benchmarking results. So we run 'benchmark' first.
-gulp.task('test-travis', sequence('benchmark', 'test'));

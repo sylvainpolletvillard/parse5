@@ -50,6 +50,6 @@
     "url": "git://github.com/inikulin/parse5.git"
   },
   "scripts": {
-    "test": "gulp test-travis"
+    "test": "gulp test"
   }
 }
