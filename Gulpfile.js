@@ -73,7 +73,7 @@ gulp.task('install-upstream-parse5', function () {
 
 gulp.task('benchmark', ['build', 'install-upstream-parse5'], function () {
     return gulp
-        .src('test/benchmark/index.js', { read: false })
+        .src('test/benchmark/*.js', { read: false })
         .pipe(benchmark({
             failOnError: true,
             reporters:   benchmark.reporters.etalon('Upstream')
