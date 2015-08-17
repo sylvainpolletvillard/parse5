@@ -31,7 +31,7 @@ module.exports = {
             name: 'Upstream',
 
             fn: function () {
-                runPages(wcParser);
+                runPages(usParser);
             }
         }
     ]

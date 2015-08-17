@@ -26,7 +26,7 @@ module.exports = {
             name: 'Upstream',
 
             fn: function () {
-                runHugePage(wcParser);
+                runHugePage(usParser);
             }
         }
     ]
