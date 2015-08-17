@@ -1,4 +1,4 @@
-import { CODE_POINTS as $ } from '../utils/unicode';
+import { CODE_POINT as $ } from '../utils/unicode';
 import {
     isReservedCodePoint,
     isSurrogatePair,

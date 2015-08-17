@@ -1,4 +1,4 @@
-export const TYPES = {
+export const TYPE = {
     character:           'character',
     nullCharacter:       'nullCharacter',
     whitespaceCharacter: 'whitespaceCharacter',
@@ -12,7 +12,7 @@ export const TYPES = {
 
 export function createStartTag (tagName) {
     return {
-        type:        TYPES.startTag,
+        type:        TYPE.startTag,
         tagName:     tagName,
         selfClosing: false,
         attrs:       []
@@ -21,7 +21,7 @@ export function createStartTag (tagName) {
 
 export function createEndTag () {
     return {
-        type:    TYPES.endTag,
+        type:    TYPE.endTag,
         tagName: tagName,
         ignored: false,
         attrs:   []
@@ -30,14 +30,14 @@ export function createEndTag () {
 
 export function createComment () {
     return {
-        type: Tokenizer.COMMENT_TOKEN,
+        type: TYPE.comment,
         data: ''
     };
 }
 
 export function createDoctype (name = '') {
     return {
-        type:        Tokenizer.DOCTYPE_TOKEN,
+        type:        TYPE.doctype,
         name:        name,
         forceQuirks: false,
         publicId:    null,

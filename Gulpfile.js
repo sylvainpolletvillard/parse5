@@ -5,7 +5,11 @@ var install   = require('gulp-install');
 var benchmark = require('gulp-benchmark');
 var rename    = require('gulp-rename');
 var through   = require('through2');
+var del       = require('del');
 
+gulp.task('clean', function (cb) {
+    del('lib/tokenizer', cb);
+});
 
 gulp.task('generate-trie', function () {
     function trieGenerator (file, enc, callback) {

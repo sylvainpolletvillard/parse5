@@ -1,7 +1,7 @@
 // Consts
 export const REPLACEMENT_CHARACTER = '\uFFFD';
 
-export const CODE_POINTS = {
+export const CODE_POINT = {
     EOF:                  -1,
     NULL:                 0x00,
     tab:                  0x09,
@@ -36,7 +36,7 @@ export const CODE_POINTS = {
     replacementCharacter: 0xFFFD
 };
 
-export const CODE_POINT_SEQUENCES = {
+export const CODE_POINT_SEQUENCE = {
     dashDashString:   [0x2D, 0x2D], //--
     doctypeString:    [0x44, 0x4F, 0x43, 0x54, 0x59, 0x50, 0x45], //DOCTYPE
     CDATAStartString: [0x5B, 0x43, 0x44, 0x41, 0x54, 0x41, 0x5B], //[CDATA[
@@ -48,7 +48,7 @@ export const CODE_POINT_SEQUENCES = {
 
 
 // Aliases
-var $ = CODE_POINTS;
+var $ = CODE_POINT;
 
 
 // Utility functions

@@ -12,6 +12,7 @@
   "homepage": "http://inikulin.github.io/parse5/",
   "license": "MIT",
   "devDependencies": {
+    "del": "^1.2.1",
     "gulp": "^3.9.0",
     "gulp-babel": "^5.2.0",
     "gulp-benchmark": "^1.1.1",
@@ -50,6 +51,6 @@
     "url": "git://github.com/inikulin/parse5.git"
   },
   "scripts": {
-    "test": "gulp test"
+    "test": "gulp benchmark"
   }
 }
