@@ -70,5 +70,22 @@ export default {
             t._emitSeveralCodePoints(referencedCodePoints);
         else
             t._emitChar('&');
+    },
+
+    //12.2.4.5 RAWTEXT state
+    //------------------------------------------------------------------
+    [STATE.RAWTEXT]: (t, cp) => {
+        if (cp === $.lessThanSign)
+            t.state = STATE.RAWTEXTLessThanSign;
+
+        else if (cp === $.NULL)
+            t._emitChar(REPLACEMENT_CHARACTER);
+
+        else if (cp === $.EOF)
+            t._emitEOFToken();
+
+        else
+            t._emitCodePoint(cp);
     }
 };
+
