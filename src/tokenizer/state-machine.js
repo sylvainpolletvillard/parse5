@@ -86,6 +86,35 @@ export default {
 
         else
             t._emitCodePoint(cp);
+    },
+
+    //12.2.4.6 Script data state
+    //------------------------------------------------------------------
+    [STATE.scriptData]: (t, cp) => {
+        if (cp === $.lessThanSign)
+            t.state = STATE.scriptDataLessThanSign;
+
+        else if (cp === $.NULL)
+            t._emitChar(REPLACEMENT_CHARACTER);
+
+        else if (cp === $.EOF)
+            t._emitEOFToken();
+
+        else
+            t._emitCodePoint(cp);
+    },
+
+    //12.2.4.7 PLAINTEXT state
+    //------------------------------------------------------------------
+    [STATE.PLAINTEXT]: (t, cp) => {
+        if (cp === $.NULL)
+            t._emitChar(REPLACEMENT_CHARACTER);
+
+        else if (cp === $.EOF)
+            t._emitEOFToken();
+
+        else
+            t._emitCodePoint(cp);
     }
 };
 

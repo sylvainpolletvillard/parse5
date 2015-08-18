@@ -3,6 +3,9 @@ var assert = require('assert'),
     path = require('path'),
     Tokenizer = require('../../lib/tokenization/tokenizer');
 
+var STATE = require('../../lib/tokenizer/state');
+var TOKEN_TYPE = require('../../lib/tokenizer/token').TYPE;
+
 function tokenize(html, initialState, lastStartTag) {
     var tokenizer = new Tokenizer(html),
         nextToken = null,
@@ -18,13 +21,13 @@ function tokenize(html, initialState, lastStartTag) {
 
         //NOTE: append current token to the output sequence in html5lib test suite compatible format
         switch (nextToken.type) {
-            case Tokenizer.CHARACTER_TOKEN:
-            case Tokenizer.NULL_CHARACTER_TOKEN:
-            case Tokenizer.WHITESPACE_CHARACTER_TOKEN:
+            case TOKEN_TYPE.character:
+            case TOKEN_TYPE.nullCharacter:
+            case TOKEN_TYPE.whitespaceCharacter:
                 out.push(['Character', nextToken.chars]);
                 break;
 
-            case Tokenizer.START_TAG_TOKEN:
+            case TOKEN_TYPE.startTag:
                 var reformatedAttrs = {};
 
                 nextToken.attrs.forEach(function (attr) {
@@ -43,15 +46,15 @@ function tokenize(html, initialState, lastStartTag) {
                 out.push(startTagEntry);
                 break;
 
-            case Tokenizer.END_TAG_TOKEN:
+            case TOKEN_TYPE.endTag:
                 out.push(['EndTag', nextToken.tagName]);
                 break;
 
-            case Tokenizer.COMMENT_TOKEN:
+            case TOKEN_TYPE.comment:
                 out.push(['Comment', nextToken.data]);
                 break;
 
-            case Tokenizer.DOCTYPE_TOKEN:
+            case TOKEN_TYPE.doctype:
                 out.push([
                     'DOCTYPE',
                     nextToken.name,
@@ -115,7 +118,12 @@ function concatCharacterTokens(tokenEntries) {
 }
 
 function getTokenizerSuitableStateName(testDataStateName) {
-    return testDataStateName.toUpperCase().replace(/\s/g, '_');
+    return {
+        'PLAINTEXT state':STATE.PLAINTEXT,
+        'RCDATA state': STATE.RCDATA,
+        'RAWTEXT state': STATE.RAWTEXT,
+        'Data state': STATE.data
+    } [testDataStateName];
 }
 
 function loadTests() {

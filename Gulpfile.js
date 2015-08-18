@@ -89,7 +89,7 @@ gulp.task('build', ['generate-trie'], function () {
 
 gulp.task('test', ['build'], function () {
     return gulp
-        .src('test/fixtures/*-test.js')
+        .src('test/fixtures/tokenizer-test.js')
         .pipe(mocha({
             ui:       'exports',
             reporter: 'progress',
