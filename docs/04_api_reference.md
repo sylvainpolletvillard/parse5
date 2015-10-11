@@ -53,7 +53,8 @@
 
 <a name="new_parse5+ParserStream_new"></a>
 #### new ParserStream(options)
-Streaming HTML parser with the scripting support.[Writable stream](https://nodejs.org/api/stream.html#stream_class_stream_writable).
+Streaming HTML parser with the scripting support.
+[Writable stream](https://nodejs.org/api/stream.html#stream_class_stream_writable).
 
 
 | Param | Type | Description |
@@ -62,7 +63,19 @@ Streaming HTML parser with the scripting support.[Writable stream](https://node
 
 **Example**  
 ```js
-var parse5 = require('parse5');var http = require('http');// Fetch google.com content and obtain it's <body> nodehttp.get('http://google.com', function(res) { var parser = new parse5.ParserStream(); parser.on('finish', function() {     var body = parser.document.childNodes[0].childNodes[1]; }); res.pipe(parser);});
+var parse5 = require('parse5');
+var http = require('http');
+
+// Fetch google.com content and obtain it's <body> node
+http.get('http://google.com', function(res) {
+ var parser = new parse5.ParserStream();
+
+ parser.on('finish', function() {
+     var body = parser.document.childNodes[0].childNodes[1];
+ });
+
+ res.pipe(parser);
+});
 ```
 <a name="parse5+ParserStream+document"></a>
 #### parserStream.document : <code>ASTNode.&lt;document&gt;</code>
@@ -71,7 +84,10 @@ Resulting document node.
 **Kind**: instance property of <code>[ParserStream](#parse5+ParserStream)</code>  
 <a name="parse5+ParserStream+event_script"></a>
 #### "script" (scriptElement, documentWrite(html), resume)
-Raised then parser encounters `<script>` element.If event has listeners then parsing will be suspended on event emission.So, if `<script>` has `src` attribute you can fetch it, execute and thenresume parser like browsers do.
+Raised then parser encounters `<script>` element.
+If event has listeners then parsing will be suspended on event emission.
+So, if `<script>` has `src` attribute you can fetch it, execute and then
+resume parser like browsers do.
 
 **Kind**: event emitted by <code>[ParserStream](#parse5+ParserStream)</code>  
 
@@ -83,7 +99,24 @@ Raised then parser encounters `<script>` element.If event has listeners then pa
 
 **Example**  
 ```js
-var parse = require('parse5');var http = require('http');var parser = new parse5.ParserStream();parser.on('script', function(scriptElement, documentWrite, resume) {  var src = parse5.treeAdapters.default.getAttrList(scriptElement)[0].value;  http.get(src, function(res) {     // Fetch script content, execute it with DOM built around `parser.document` and     // `document.write` implemented using `documentWrite`     ...     // Then resume the parser     resume();  });});parser.end('<script src="example.com/script.js"></script>');
+var parse = require('parse5');
+var http = require('http');
+
+var parser = new parse5.ParserStream();
+
+parser.on('script', function(scriptElement, documentWrite, resume) {
+  var src = parse5.treeAdapters.default.getAttrList(scriptElement)[0].value;
+
+  http.get(src, function(res) {
+     // Fetch script content, execute it with DOM built around `parser.document` and
+     // `document.write` implemented using `documentWrite`
+     ...
+     // Then resume the parser
+     resume();
+  });
+});
+
+parser.end('<script src="example.com/script.js"></script>');
 ```
 <a name="parse5+SerializerStream"></a>
 ### parse5.SerializerStream ⇐ <code>stream.Readable</code>
@@ -144,7 +177,7 @@ var http = require('http');
 var fs = require('fs');
 
 var file = fs.createWriteStream('/home/google.com.html');
-var parser = new SAXParser();
+var parser = new parse5.SAXParser();
 
 parser.on('text', function(text) {
  // Handle page text content
